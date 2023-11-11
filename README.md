@@ -1,8 +1,8 @@
 
+
 ## Overview
 
 In this project, We will build a Github repository from scratch and create a scaffolding in performing both Continuous Integration and Continuous Delivery.
-
 - Using Github Actions along with a Makefile, requirements.txt and application code to perform an initial lint, test, and install cycle.
 - Integrating this project with Azure Pipelines to enable Continuous Delivery to Azure App Service.
 - Using Azure Cloud shell in this project.
@@ -14,11 +14,9 @@ In this project, We will build a Github repository from scratch and create a sca
 - [Final Project Plan](documents/FinalProjectPlan.xlsx)
 
 ## Architecture Diagram
-
 ![Architectural Diagram](screenshots/architecture.png)
 
 ## Instructions
-
 ### Configuring Github
 
 - Log in Azure Portal and access Azure Cloud Shell
@@ -26,21 +24,22 @@ In this project, We will build a Github repository from scratch and create a sca
 - Create a ssh key by using this command:
 
     ```bash
-    ssh-keygen -t rsa -b 2048 -C "phuongnv1996@outlook.com"
+    ssh-keygen -t rsa -b 2048 -C "huynx111996@outlook.com"
     ```
 
     ![SSH Key Create](screenshots/az-ssh.png)
 
-- Copy the public key to Github Account -> Settings -> SSH and GPG keys (<https://github.com/settings/keys>)
+- Copy the public key to Github Account -> Settings -> SSH and GPG keys (https://github.com/settings/keys)
 
     ![Setting SSH Key in Github](screenshots/github-setting-ssh.png)
 
+
 ### Project Locally
 
-- After setting SSH key in Github, we can clone source code to Azure Cloud Shell by using command below:
+- After setting SSH key in Github, we can clone source code to Azure Cloud Shell by using command below: 
 
     ```bash
-    git clone git@github.com:phuongnv196/udacity-project-2.git
+    git clone git@github.com:huynx11196/udacity-project-2.git
     ```
 
     ![Clone git source code](screenshots/github-clone-success.png)
@@ -51,11 +50,10 @@ In this project, We will build a Github repository from scratch and create a sca
     python3 -m venv ~/.udacity-project-2
     source ~/.udacity-project-2/bin/activate
   ```
-
     ![Install dependencies](screenshots/az-create-inv.png)
+                                  
 
 - Install all dependencies by using **make**
-
     ```bash
     make all
     ```
@@ -63,30 +61,26 @@ In this project, We will build a Github repository from scratch and create a sca
     ![Install dependencies](screenshots/az-install-dependencies.png)
 
 - Run application using **flask**
-
     ```bash
     export FLASK_APP=app.py
     flask run
     ```
-
-  ![Local run](screenshots/az-flask-run.png)
+    
+  ![Local run](screenshots/az-flask-run.png)                                                                   
 
 - After run application we had to open new tab and lauch a new Azure Cloud Shell session to test the application by running the *make_prediction.sh* script
-
     ```bash
     chmod +x make_prediction.sh
     ```
-
     ```bash
     ./make_prediction.sh
-    ```
+    ```                               
 
-    We can see the result of script:
-
+    We can see the result of script: 
     ```bash
     Port: 5000
     {"prediction":[20.353731771344123]}
-    ```
+    ```      
 
     ![Make prediction result](screenshots/az-make-prediction-result.png)  
 
@@ -100,36 +94,32 @@ Azure App Service is a cloud platform service (PaaS) offered by Azure that allow
 - It integrates very well with Azure pipelines for continuous delivery, allowing you to automate the deployment process and deliver updates faster and more reliably.
 For more information and tutorials on how to use Azure App Service, please visit this [link](https://docs.microsoft.com/en-us/azure/app-service/).
 
-#### ML Azure App Service
 
-Azure App Service provides various options to create a new application. In this section, you will learn how to use the Azure CLI to deploy your app. In another section, you will see how to use Azure Pipelines to automate the deployment process.
+#### ML Azure App Service
+Azure App Service provides various options to create a new application. In this section, you will learn how to use the Azure CLI to deploy your app. In another section, you will see how to use Azure Pipelines to automate the deployment process.                                          
 **Set up Azure CLI:**
 
 - Create a new Resource Group for our app
 
    ```bash
-    az group create --location westeurope --resource-group phuongnv_rg_02 --tags project=udacity_p_2 environment=dev
-    ```
-
+    az group create --location westeurope --resource-group huynx11_rg_02 --tags project=udacity_p_2 environment=dev
+    ```                                                                                                                                                                                                                              
 **Deploy Application:**
 
-- Clone the project, we can clone source code to Azure Cloud Shell by using command below:
-
+- Clone the project, we can clone source code to Azure Cloud Shell by using command below: 
     ```bash
-    git clone git@github.com:phuongnv196/udacity-project-2.git
+    git clone git@github.com:huynx11196/udacity-project-2.git
     ```
-
 - Create a Python Virtual Environment to run your application
 
     ```bash
     python3 -m venv ~/.udacity-project-2
     source ~/.udacity-project-2/bin/activate
   ```
-
     ![Install dependencies](screenshots/az-create-inv.png)
+                                  
 
 - Install all dependencies by using **make**
-
     ```bash
     make all
     ```
@@ -139,7 +129,7 @@ Azure App Service provides various options to create a new application. In this 
 - Deploy application into the our resource group
 
     ```bash
-    az webapp up -n flask-app-phuongnv --resource-group phuongnv_rg_02 --sku FREE
+    az webapp up -n flask-app-huynx11 --resource-group huynx11_rg_02 --sku FREE
     ```
 
 - Application will be deployed to azure service
@@ -147,10 +137,10 @@ Azure App Service provides various options to create a new application. In this 
 
   ![Azure Service Deployed available](screenshots/az-service-deploy-flask-app.png)
   
-- We can find app service in Azure Portal
+ - We can find app service in Azure Portal
   ![App Service in Azure Portal](screenshots/az-flask-app-service.png)
   
-- Application was deployed successfully using azure pipelines from Deployment Center
+  - Application was deployed successfully using azure pipelines from Deployment Center
   ![Azure app service from the Deployment Center](screenshots/az-deployment-center.png)
 
 **Test ML Application:**
@@ -165,14 +155,13 @@ Azure App Service provides various options to create a new application. In this 
 
     ./make_predict_azure_app.sh
     ```
-
-- We will get the result:
+- We will get the result: 
 
     ```
     Port: 443
     {"prediction":[20.353731771344123]}
     ```
-
+    
     ![Azure Prediction Result](screenshots/az-make-azure-prediction-result.png)
 
 - Run locust from project folder in Windows by using Windows Power Shell
@@ -180,10 +169,9 @@ Azure App Service provides various options to create a new application. In this 
     ```bash
     locust
     ```
-
   ![Run locust test](screenshots/az-lotust-start.png)
 
-- We can access to <http://localhost:8089> to test application with *locust*
+- We can access to http://localhost:8089 to test application with *locust*
 
   ![Locust Test Result](screenshots/az-lolust-result.png)
 
@@ -191,7 +179,7 @@ Azure App Service provides various options to create a new application. In this 
 
 Azure App Service offers the capability to access and view application logs. You can access these logs using Azure CLI commands:
     ```
-    az webapp log tail --name flask-app-phuongnv --resource-group phuongnv_rg_02
+    az webapp log tail --name flask-app-huynx11 --resource-group huynx11_rg_02
     ```
 
 ![Screenshot of Logs](screenshots/az-flask-app-service-log.png)
@@ -271,6 +259,8 @@ With these offerings, Azure DevOps streamlines the software development lifecycl
 
 #### Set Up Azure Pipelines for Continuous Delivery
 
+
+
 In this project, we leverage Azure Pipelines for the continuous delivery of the Flask ML App. Follow the steps below to set up your environment:
 
 ### Setting up Azure DevOps
@@ -278,26 +268,26 @@ In this project, we leverage Azure Pipelines for the continuous delivery of the 
 - If you don't already have an Azure DevOps account, go to [dev.azure.com](https://dev.azure.com) to sign up for a free account.
 
 - Create an Azure DevOps project:
-  - Create a new project and establish a connection to Azure. The screenshots below illustrate the process:
-
+   - Create a new project and establish a connection to Azure. The screenshots below illustrate the process:
+   
      ![Create Azure Project](screenshots/devops-create-project.png)
 
 - After creating the project, navigate to **Project settings** from the left navigation. On the Project Settings page, select **Pipelines > Service connections**, and then click on **New service connection**:
-
+   
      ![Azure Project Settings](screenshots/devops-create-service-connection.png)
 
 - In the **New Service Connections** dialog, select **Azure Resource Manager** from the dropdown:
-
+   
      ![New Azure Resource Manager](screenshots/devops-create-service-connection-2.png)
 
 - In the **Service Connection** dialogue box:
-  - Select the scope level as **Subscription**.
-  - You might need to log in.
-  - Choose the **Resource Group** of the **Azure Web App** deployed.
-  - Input a valid **Service Connection Name**.
-  - Check the box for **Grant Access Permissions to all pipelines**.
-  - Click **Save**.
-
+   - Select the scope level as **Subscription**.
+   - You might need to log in.
+   - Choose the **Resource Group** of the **Azure Web App** deployed.
+   - Input a valid **Service Connection Name**.
+   - Check the box for **Grant Access Permissions to all pipelines**.
+   - Click **Save**.
+   
      ![New Azure Resource Manager 2](screenshots/devops-create-service-connection-3.png)
 
 ### Setting up Azure Pipeline
@@ -316,20 +306,21 @@ In this project, we leverage Azure Pipelines for the continuous delivery of the 
 - From your project page's left navigation, navigate to **Pipelines** and select **New Pipelines**.
 
 - In the New Pipeline Interface:
-  - Select GitHub as the repository source.
+   - Select GitHub as the repository source.
     ![Select GitHub Repo](screenshots/devops-create-pipelines.png)
 
-  - Select your project.
+   - Select your project.
      ![Select GitHub Repo 2](screenshots/devops-create-pipelines-1.png)
 
 - In the Configure section, choose **Python to Linux Azure Webapp**:
-  - Select the deployed app.
+   - Select the deployed app.
     ![Configure Pipeline](screenshots/devops-create-pipelines-2.png)
     ![Configure Pipeline](screenshots/devops-create-pipelines-3.png)
     ![Configure Pipeline](screenshots/devops-create-pipelines-4.png)
-
-  - Validate and Review the configuration.
+     
+   - Validate and Review the configuration.
     ![Select Web App Name](screenshots/devops-create-pipelines-5.png)
+     
 
 - In the Review section, change pool to Agent Pool you created before. Validate the Pipeline YAML and click the **Save and Run** button. You might be prompted to save the code into GitHub.
 
@@ -343,11 +334,9 @@ In this project, we leverage Azure Pipelines for the continuous delivery of the 
      ![Pipeline Stage](screenshots/devops-piplines-lists.png)
 
 ## Resource Cleanup
-
 To prevent incurring Azure resource charges related to this project, it is advisable to remove the resource group housing the App Service and the App Service Plan.
 
 ## Recommendations
-
 - Develop efficient microservices.
 - Establish useful and actionable alert mechanisms.
 

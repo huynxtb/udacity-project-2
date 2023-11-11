@@ -2,11 +2,22 @@ trigger:
 - main
 
 variables:
+  # Azure Resource Manager connection created during pipeline creation
   azureServiceConnectionId: 'c0f950c3-3ea6-4eac-bbde-d416b93f61da'
+
+  # Web app name
   webAppName: 'flask-app-huynx11'
+
+  # Agent VM image name
   vmImageName: 'ubuntu-latest'
+
+  # Environment name
   environmentName: 'flask-app-huynx11'
+
+  # Project root folder. Point to the folder containing manage.py file.
   projectRoot: $(System.DefaultWorkingDirectory)
+
+  # Python version: 3.8.10
   pythonVersion: '3.8.10'
 
 stages:
@@ -20,6 +31,7 @@ stages:
       inputs:
         versionSpec: '$(pythonVersion)'
       displayName: 'Use Python $(pythonVersion)'
+
     - script: |
         python -m venv antenv
         source antenv/bin/activate
@@ -28,6 +40,7 @@ stages:
         pip install -r requirements.txt
       workingDirectory: $(projectRoot)
       displayName: "Install requirements"
+
     - task: ArchiveFiles@2
       displayName: 'Archive files'
       inputs:
@@ -36,6 +49,7 @@ stages:
         archiveType: zip
         archiveFile: $(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip
         replaceExistingArchive: true
+
     - upload: $(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip
       displayName: 'Upload package'
       artifact: drop
@@ -52,10 +66,12 @@ stages:
       runOnce:
         deploy:
           steps:
+
           - task: UsePythonVersion@0
             inputs:
               versionSpec: '$(pythonVersion)'
             displayName: 'Use Python version'
+
           - task: AzureWebApp@1
             displayName: 'Deploy Azure Web App : flask-app-huynx11'
             inputs:
