@@ -7,6 +7,10 @@ In this project, We will build a Github repository from scratch and create a sca
 - Integrating this project with Azure Pipelines to enable Continuous Delivery to Azure App Service.
 - Using Azure Cloud shell in this project.
 
+## Badge
+
+[![Python application test with Github Actions](https://github.com/HTTP2916/azure-devops-project2.1/actions/workflows/pythonapp.yml/badge.svg)](https://github.com/huynxtb/udacity-project-2/actions/workflows/pythonapp.yml)
+
 ## Project Plan
 
 - [Trello Board](https://trello.com/b/umdJDZJw/udacity-project-2)
